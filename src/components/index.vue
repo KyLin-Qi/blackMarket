@@ -61,11 +61,15 @@
                         <ul class="side-img-list">
                             <li v-for="(item, index) in toplist" :key="item.id">
                                 <div class="img-box">
+                                    <router-link :to="'/detail/'+item.id">
                                     <label>{{index+1}}</label>
                                     <img :src="item.img_url">
+                                    </router-link>
                                 </div>
                                 <div class="txt-box">
-                                    <a href="/goods/show-98.html">{{item.title}}</a>
+                                     <router-link :to="'/detail/'+item.id">
+                                     {{item.title}}
+                                     </router-link>
                                     <!-- <span>2017-09-26</span> -->
                                     <span>{{item.add_time | times}}</span>
                                 </div>

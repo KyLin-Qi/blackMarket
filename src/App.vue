@@ -26,7 +26,7 @@
             <a href="" class="">
               <i class="iconfont icon-cart"></i>购物车(
               <span id="shoppingCartCount">
-                <span>{{$store.state.count}}</span>
+                <span>{{$store.getters.cartGoodCount}}</span>
               </span>)</a>
           </div>
         </div>
@@ -116,6 +116,9 @@
             </div>
         </div>
     </div>
+    <BackTop :height="100" :bottom="50">
+        <div class="top">返回顶端</div>
+    </BackTop>
   </div>
 </template>
 
@@ -151,7 +154,10 @@ export default {
   },
   methods:{
     add(){
-       this.$store.commit('increment')
+       this.$store.commit('addCart',{
+         id:66,
+         buyCout:98
+       })
     }
    
   }
@@ -163,4 +169,11 @@ export default {
 .menuhd ul li a span.over, .menu ul li a span.bg {
    background: goldenrod
 }
+.top{
+      padding: 10px;
+      background: rgba(0, 153, 229, .7);
+      color: #fff;
+      text-align: center;
+      border-radius: 2px;
+    }
 </style>

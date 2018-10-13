@@ -25,12 +25,31 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
+
   state: {
-    count: 0
+    shopCartData: JSON.parse(window.localStorage.getItem('cartData')) || {}
   },
+
   mutations: {
-    increment (state) {
-      state.count++
+    addCart(state, opt) {
+      if (state.shopCartData[opt.id] == undefined) {
+        Vue.set(state.shopCartData, opt.id, opt.buyCount);
+      } else {
+        state.shopCartData[opt.id] += opt.buyCount;
+      }
+    },
+  },
+  // vuex的计算属性
+  getters: {
+    cartGoodCount(state) {
+      let totalConut = 0;
+      for (const key in state.shopCartData) {
+          totalConut += state.shopCartData[key]
+        
+      }
+
+
+      return totalConut;
     }
   }
 })
@@ -96,3 +115,7 @@ new Vue({
   router,
   store
 }).$mount('#app')
+
+window.onbeforeunload = function () {
+  window.localStorage.setItem('cartData', JSON.stringify(store.state.shopCartData));
+}

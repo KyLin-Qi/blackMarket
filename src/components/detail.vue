@@ -56,7 +56,7 @@
                                         <dd>
                                             <div id="buyButton" class="btn-buy">
                                                 <button onclick="cartAdd(this,'/',1,'/shopping.html');" class="buy">立即购买</button>
-                                                <button onclick="cartAdd(this,'/',0,'/cart.html');" class="add">加入购物车</button>
+                                                <button @click="addCart" class="add">加入购物车</button>
                                             </div>
                                         </dd>
                                     </dl>
@@ -269,18 +269,21 @@ export default {
         }
         // 发送评论,传递数据
         this.$axios.post("/site/validate/comment/post/goods/" + this.goodId,{
-            commentTxt:this.message  
-        }).then(response => {
-            console.log(response);
-            
+            commenttxt:this.message  
+        }).then(response => {         
             // 回到第一页的数据
             this.pageIndex = 1;
             this.getComments();
             // 清空文本框内容
             this.message = "";
             this.$Message.success("master,评论发表成功了哟!");
-
-
+        })
+    },
+    // 计算累加数量
+    addCart(){
+        this.$store.commit("addCart",{
+            id:this.goodId,
+            buyCount:this.buyNum
         })
     }
   },
