@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 
+
 // 引入index.vue组件
 import index from './components/index.vue';
 
